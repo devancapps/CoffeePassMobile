@@ -1,0 +1,22 @@
+# Firebase
+firebase-debug.log
+.firebaserc
+
+# Claude
+.claude/
+
+# OS
+.DS_Store
+*.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*
+
+# Node
+node_modules/
+
+# Expo
+.expo/
+dist/

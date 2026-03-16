@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoffeePass — Partner with Us</title>
+  <meta name="description" content="CoffeePass is a mobile marketplace connecting local coffee drinkers with independent cafés. Zero upfront cost, 12% founder rate, weekly payouts. Apply to become a founding partner." />
+  <meta name="theme-color" content="#3B1F0E" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="CoffeePass — Partner with Us" />
+  <meta property="og:description" content="Your café deserves more customers. We'll send them. Zero upfront cost, 12% founder rate, weekly payouts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://coffeepass.app/og-image.png" />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --espresso:   #3B1F0E;
+      --espresso2:  #4A2C2A;
+      --caramel:    #C4883A;
+      --caramel2:   #E6A042;
+      --cream:      #FFF8F0;
+      --cream2:     #F5EBD8;
+      --white:      #FFFFFF;
+      --black:      #1A1A1A;
+      --gray:       #6B6B6B;
+      --lightgray:  #F2F2F2;
+      --green:      #1E6B3C;
+      --lightgreen: #D6EFE1;
+      --red:        #C0392B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    .main-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(26, 14, 6, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 68px;
+      border-bottom: 1px solid rgba(196,136,58,0.12);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo-icon {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--caramel), var(--caramel2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; box-shadow: 0 2px 8px rgba(196,136,58,0.3);
+    }
+    .nav-logo-text { font-size: 21px; font-weight: 900; color: var(--white); letter-spacing: -0.5px; }
+    .nav-actions { display: flex; align-items: center; gap: 6px; }
+    .nav-cta {
+      background: linear-gradient(135deg, var(--caramel), var(--caramel2));
+      color: var(--white);
+      padding: 10px 24px; border-radius: 10px; font-weight: 700; font-size: 14px;
+      text-decoration: none; transition: all 0.25s;
+      box-shadow: 0 2px 12px rgba(196,136,58,0.25);
+      letter-spacing: -0.2px;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(196,136,58,0.45); }
+    .nav-link {
+      color: rgba(255,255,255,0.65); font-size: 14px; font-weight: 600;
+      text-decoration: none; padding: 8px 16px; border-radius: 8px;
+      transition: all 0.2s; white-space: nowrap;
+      letter-spacing: 0.1px;
+    }
+    .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+    .nav-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.12); margin: 0 8px; flex-shrink: 0; }
+    .nav-appstore {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white); padding: 8px 16px; border-radius: 10px;
+      text-decoration: none; transition: all 0.25s; white-space: nowrap;
+    }
+    .nav-appstore:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.28); transform: translateY(-1px); }
+    .nav-appstore svg { flex-shrink: 0; opacity: 0.9; }
+    .nav-appstore-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-appstore-sub { font-size: 9px; font-weight: 500; opacity: 0.6; letter-spacing: 0.3px; }
+    .nav-appstore-main { font-size: 14px; font-weight: 700; letter-spacing: -0.2px; }
+    @media (max-width: 600px) { .nav-appstore { display: none; } }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--espresso) 0%, #2A1208 50%, #1A0A04 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 100px 40px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(196,136,58,0.15) 0%, transparent 60%);
+    }
+    .hero-inner {
+      max-width: 1100px; width: 100%;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(196,136,58,0.2); border: 1px solid rgba(196,136,58,0.4);
+      color: var(--caramel2); padding: 6px 14px; border-radius: 100px;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+      margin-bottom: 24px;
+    }
+    .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--caramel2); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 900; color: var(--white);
+      line-height: 1.1; letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { color: var(--caramel2); font-style: normal; }
+    .hero p {
+      font-size: 18px; color: rgba(255,255,255,0.75);
+      line-height: 1.7; margin-bottom: 36px; max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--caramel); color: var(--white);
+      padding: 16px 32px; border-radius: 12px; font-weight: 700; font-size: 16px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      transition: all 0.2s; border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--caramel2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(196,136,58,0.4); }
+    .btn-secondary {
+      background: transparent; color: rgba(255,255,255,0.8);
+      padding: 16px 24px; border-radius: 12px; font-weight: 600; font-size: 16px;
+      text-decoration: none; border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 48px;
+      padding-top: 36px; border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .hero-stat-num { font-size: 28px; font-weight: 800; color: var(--white); }
+    .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* Hero Card */
+    .hero-card-wrap { display: flex; justify-content: center; }
+    .hero-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px; padding: 32px; backdrop-filter: blur(12px);
+      width: 100%; max-width: 360px;
+    }
+    .hero-card-title { color: rgba(255,255,255,0.5); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+    .payout-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .payout-row:last-of-type { border-bottom: none; }
+    .payout-label { font-size: 14px; color: rgba(255,255,255,0.7); }
+    .payout-val { font-size: 16px; font-weight: 700; color: var(--white); }
+    .payout-val.green { color: #4ADE80; }
+    .payout-val.caramel { color: var(--caramel2); }
+    .weekly-badge {
+      margin-top: 20px; background: rgba(74,222,128,0.12);
+      border: 1px solid rgba(74,222,128,0.3);
+      border-radius: 10px; padding: 14px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .weekly-badge-label { font-size: 13px; color: rgba(255,255,255,0.6); }
+    .weekly-badge-val { font-size: 20px; font-weight: 800; color: #4ADE80; }
+
+    /* ── SECTION WRAPPER ── */
+    section { padding: 96px 40px; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--caramel); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+      color: var(--espresso); letter-spacing: -1px; line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 18px; color: var(--gray); max-width: 560px; line-height: 1.7;
+    }
+
+    /* ── PROBLEM ── */
+    .problem { background: var(--cream); }
+    .problem-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .problem-card {
+      background: var(--white); border: 1px solid #E8D5B5;
+      border-radius: 16px; padding: 28px;
+    }
+    .problem-icon { font-size: 32px; margin-bottom: 16px; }
+    .problem-card h3 { font-size: 17px; font-weight: 700; color: var(--espresso2); margin-bottom: 8px; }
+    .problem-card p { font-size: 14px; color: var(--gray); line-height: 1.65; }
+
+    /* ── HOW IT WORKS ── */
+    .steps { background: var(--white); }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 32px;
+      margin-top: 56px; position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute; top: 36px; left: calc(16.6% + 20px); right: calc(16.6% + 20px);
+      height: 2px; background: linear-gradient(90deg, var(--caramel), var(--caramel));
+      opacity: 0.3;
+    }
+    .step { text-align: center; position: relative; }
+    .step-num {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--caramel) 0%, var(--caramel2) 100%);
+      color: var(--white);
+      font-size: 24px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px; position: relative; z-index: 1;
+      box-shadow: 0 4px 20px rgba(196,136,58,0.35);
+    }
+    .step h3 { font-size: 18px; font-weight: 700; color: var(--espresso); margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--gray); line-height: 1.65; }
+
+    /* ── EARNINGS ── */
+    .earnings { background: var(--espresso); }
+    .earnings .section-title { color: var(--white); }
+    .earnings .section-tag { color: var(--caramel2); }
+    .earnings .section-sub { color: rgba(255,255,255,0.65); }
+    .earnings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 56px; align-items: start; }
+
+    .math-card {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; padding: 32px;
+    }
+    .math-card-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--caramel2); margin-bottom: 24px; }
+    .math-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .math-row:last-child { border-bottom: none; }
+    .math-row-label { font-size: 14px; color: rgba(255,255,255,0.65); }
+    .math-row-val { font-size: 16px; font-weight: 700; color: var(--white); }
+    .math-row-val.plus { color: #4ADE80; }
+    .math-row-val.minus { color: #F87171; }
+    .math-total {
+      margin-top: 20px; background: rgba(74,222,128,0.12);
+      border: 1px solid rgba(74,222,128,0.25); border-radius: 12px;
+      padding: 16px 20px; display: flex; justify-content: space-between; align-items: center;
+    }
+    .math-total-label { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.8); }
+    .math-total-val { font-size: 24px; font-weight: 900; color: #4ADE80; }
+
+    .scale-table {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; overflow: hidden;
+    }
+    .scale-table-header {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      padding: 14px 24px; background: rgba(255,255,255,0.08);
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; color: rgba(255,255,255,0.5);
+    }
+    .scale-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      padding: 16px 24px; border-top: 1px solid rgba(255,255,255,0.06);
+      align-items: center;
+    }
+    .scale-row:hover { background: rgba(255,255,255,0.04); }
+    .scale-cafes { font-size: 15px; font-weight: 600; color: var(--white); }
+    .scale-orders { font-size: 14px; color: rgba(255,255,255,0.6); }
+    .scale-profit { font-size: 16px; font-weight: 800; color: #4ADE80; }
+    .scale-tag {
+      display: inline-block; background: rgba(196,136,58,0.2);
+      color: var(--caramel2); font-size: 10px; font-weight: 700;
+      padding: 2px 8px; border-radius: 100px; margin-left: 8px;
+    }
+
+    /* ── FOUNDER RATE ── */
+    .founder { background: var(--cream2); }
+    .founder-inner {
+      background: var(--white); border: 2px solid var(--caramel);
+      border-radius: 24px; padding: 56px; max-width: 800px; margin: 0 auto;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .founder-inner::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,136,58,0.1) 0%, transparent 70%);
+    }
+    .founder-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(196,136,58,0.12); border: 1px solid rgba(196,136,58,0.3);
+      color: var(--caramel); padding: 8px 18px; border-radius: 100px;
+      font-size: 13px; font-weight: 700; margin-bottom: 28px;
+    }
+    .founder-rate { font-size: 96px; font-weight: 900; color: var(--espresso); line-height: 1; letter-spacing: -4px; }
+    .founder-rate span { color: var(--caramel); }
+    .founder h2 { font-size: 28px; font-weight: 700; color: var(--espresso); margin: 16px 0 12px; }
+    .founder p { font-size: 16px; color: var(--gray); max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+    .founder-features {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .founder-feat { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--espresso2); }
+    .founder-feat-icon { color: var(--green); font-size: 18px; }
+    .founder-note { font-size: 13px; color: var(--gray); margin-top: 16px; font-style: italic; }
+
+    /* ── COMPARISON ── */
+    .compare { background: var(--white); }
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 56px; border-radius: 20px; overflow: hidden; border: 1px solid #E8D5B5; }
+    .compare-header {
+      padding: 20px 24px; font-size: 15px; font-weight: 700;
+      text-align: center; display: flex; align-items: center; justify-content: center;
+    }
+    .compare-header.neutral { background: var(--lightgray); color: var(--espresso); justify-content: flex-start; }
+    .compare-header.bad { background: #FEE2E2; color: var(--red); }
+    .compare-header.good { background: var(--espresso); color: var(--white); }
+    .compare-cell {
+      padding: 18px 24px; font-size: 14px; border-top: 1px solid #F0E8E0;
+      text-align: center; display: flex; align-items: center; justify-content: center;
+      min-height: 58px;
+    }
+    .compare-cell.neutral { background: var(--cream); color: var(--espresso); font-weight: 600; text-align: left; justify-content: flex-start; }
+    .compare-cell.bad { background: #FFF8F8; color: var(--red); }
+    .compare-cell.good { background: var(--cream2); color: var(--green); font-weight: 600; }
+
+    /* ── OUTREACH STRATEGY ── */
+    .strategy { background: var(--cream); }
+    .strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+    .strategy-card {
+      background: var(--white); border: 1px solid #E8D5B5;
+      border-radius: 16px; padding: 28px;
+    }
+    .strategy-card-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .strategy-num {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--espresso); color: var(--white);
+      font-size: 15px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .strategy-card h3 { font-size: 16px; font-weight: 700; color: var(--espresso2); }
+    .strategy-card p { font-size: 14px; color: var(--gray); line-height: 1.65; margin-bottom: 12px; }
+    .strategy-tag { display: inline-block; background: var(--lightgreen); color: var(--green); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 100px; margin-right: 6px; margin-bottom: 4px; }
+    .strategy-tag.orange { background: rgba(196,136,58,0.12); color: var(--caramel); }
+    .conv-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid #F0E8E0; color: var(--gray); }
+    .conv-row span:last-child { font-weight: 700; color: var(--espresso); }
+
+    /* ── PITCH SCRIPTS ── */
+    .pitches { background: var(--white); }
+    .pitch-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .pitch-tab {
+      padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; border: 2px solid #E8D5B5; background: var(--cream); color: var(--espresso);
+      transition: all 0.2s;
+    }
+    .pitch-tab.active { background: var(--espresso); border-color: var(--espresso); color: var(--white); }
+    .pitch-content { display: none; }
+    .pitch-content.active { display: block; }
+    .pitch-box {
+      background: var(--cream); border: 1px solid #E8D5B5; border-radius: 16px; padding: 32px;
+      max-width: 700px;
+    }
+    .pitch-channel { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--caramel); margin-bottom: 8px; }
+    .pitch-subj { font-size: 15px; font-weight: 700; color: var(--espresso); margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #E8D5B5; }
+    .pitch-subj span { color: var(--gray); font-weight: 400; font-size: 13px; }
+    .pitch-body { font-size: 15px; color: var(--black); line-height: 1.85; white-space: pre-line; }
+    .pitch-tip {
+      margin-top: 20px; padding: 14px 16px; border-radius: 10px;
+      background: var(--lightgreen); font-size: 13px; color: var(--green); font-weight: 500;
+    }
+
+    /* ── SPOTS PROGRESS ── */
+    .spots-bar-wrap {
+      max-width: 400px; margin: 28px auto 0; text-align: center;
+    }
+    .spots-bar-label {
+      font-size: 13px; color: var(--gray); margin-bottom: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .spots-bar-label strong { color: var(--espresso); font-weight: 700; }
+    .spots-bar-label .spots-left { color: var(--caramel); font-weight: 700; font-size: 14px; }
+    .spots-bar-track {
+      height: 8px; background: #E8D5B5; border-radius: 100px; overflow: hidden;
+    }
+    .spots-bar-fill {
+      height: 100%; width: 23%; border-radius: 100px;
+      background: linear-gradient(90deg, var(--caramel), var(--caramel2));
+      transition: width 1s ease;
+    }
+
+    /* ── FOOTER NAV ── */
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px; color: rgba(255,255,255,0.35); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    /* ── FAQ ── */
+    .faq { background: var(--cream); }
+    .faq-list { max-width: 720px; margin: 48px auto 0; }
+    .faq-item { border-bottom: 1px solid #E8D5B5; }
+    .faq-q {
+      width: 100%; text-align: left; padding: 20px 0;
+      font-size: 16px; font-weight: 600; color: var(--espresso);
+      background: none; border: none; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .faq-q .arrow { font-size: 20px; transition: transform 0.3s; color: var(--caramel); flex-shrink: 0; }
+    .faq-q.open .arrow { transform: rotate(45deg); }
+    .faq-a { font-size: 15px; color: var(--gray); line-height: 1.7; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-a.open { max-height: 300px; padding-bottom: 20px; }
+
+    /* ── FORM ── */
+    .signup { background: var(--espresso); }
+    .signup-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .signup .section-title { color: var(--white); }
+    .signup .section-tag { color: var(--caramel2); }
+    .signup .section-sub { color: rgba(255,255,255,0.65); margin: 0 auto 48px; }
+    .form-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px; padding: 40px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
+    .form-group.full { grid-column: 1/-1; }
+    label { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); }
+    input, select, textarea {
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px; padding: 13px 16px;
+      font-size: 15px; color: var(--white); font-family: inherit;
+      transition: border-color 0.2s; outline: none;
+      width: 100%;
+    }
+    input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.3); }
+    input:focus, select:focus, textarea:focus { border-color: var(--caramel); }
+    select { cursor: pointer; }
+    select option { background: var(--espresso); }
+    textarea { resize: vertical; min-height: 90px; }
+    .form-submit {
+      width: 100%; margin-top: 8px; padding: 16px;
+      background: var(--caramel); color: var(--white);
+      font-size: 17px; font-weight: 800; border: none;
+      border-radius: 12px; cursor: pointer;
+      transition: all 0.2s; letter-spacing: -0.3px;
+    }
+    .form-submit:hover { background: var(--caramel2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(196,136,58,0.4); }
+    .form-note { font-size: 13px; color: rgba(255,255,255,0.4); margin-top: 16px; }
+    .form-submit.loading { opacity: 0.7; pointer-events: none; }
+    .form-submit.loading::after { content: ' ⏳'; }
+
+    /* ── SUCCESS MODAL ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 24px; padding: 48px 40px;
+      max-width: 420px; width: 90%; text-align: center;
+    }
+    .modal-icon { font-size: 56px; margin-bottom: 16px; }
+    .modal h2 { font-size: 26px; font-weight: 800; color: var(--espresso); margin-bottom: 12px; }
+    .modal p { font-size: 16px; color: var(--gray); line-height: 1.65; margin-bottom: 28px; }
+    .modal-close { background: var(--espresso); color: var(--white); border: none; padding: 14px 32px; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0F0704; padding: 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo { font-size: 20px; font-weight: 800; color: var(--white); }
+    .footer-logo span { color: var(--caramel); }
+    footer p { font-size: 13px; color: rgba(255,255,255,0.35); }
+
+    /* ── RESPONSIVE ── */
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── NAV SCROLL SHADOW ── */
+    nav {
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+    }
+
+    /* ── MOBILE MENU ── */
+    .nav-hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      width: 36px; height: 36px;
+      flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--white); border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed; bottom: 32px; right: 32px; z-index: 90;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--espresso); color: var(--white);
+      border: none; cursor: pointer;
+      font-size: 20px; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(16px);
+      transition: all 0.3s; pointer-events: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .back-to-top.visible {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+    }
+    .back-to-top:hover {
+      background: var(--caramel); transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(196,136,58,0.4);
+    }
+
+
+    @media (max-width: 900px) {
+      .main-nav { padding: 0 20px; }
+      section { padding: 72px 20px; }
+      .hero { padding: 100px 20px 72px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-card-wrap { justify-content: flex-start; }
+      .hero-card { max-width: 100%; }
+      .problem-grid, .steps-grid { grid-template-columns: 1fr; }
+      .steps-grid::before { display: none; }
+      .earnings-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr 1fr; }
+      .compare-header.bad, .compare-cell.bad { display: none; }
+      .strategy-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .founder-inner { padding: 36px 24px; }
+      .founder-rate { font-size: 72px; }
+      footer { flex-direction: column; text-align: center; }
+      .nav-hamburger { display: flex; }
+      .nav-actions {
+        position: fixed; top: 68px; left: 0; right: 0;
+        background: rgba(59, 31, 14, 0.98); backdrop-filter: blur(12px);
+        flex-direction: column; padding: 20px; gap: 12px;
+        transform: translateY(-120%); transition: transform 0.3s;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        pointer-events: none;
+      }
+      .nav-actions.open { transform: translateY(0); pointer-events: auto; }
+      .nav-appstore { display: flex !important; justify-content: center; }
+      .nav-cta { text-align: center; width: 100%; justify-content: center; display: flex; }
+      .nav-link { font-size: 16px; text-align: center; padding: 12px 16px; }
+      .nav-divider { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="main-nav">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">☕</div>
+    <span class="nav-logo-text">CoffeePass</span>
+  </a>
+  <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-actions">
+    <a href="#how-it-works" class="nav-link">How It Works</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <div class="nav-divider"></div>
+    <a href="#" class="nav-appstore" title="Download on the App Store">
+      <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M14.97 11.63c-.02-2.39 1.95-3.54 2.04-3.6-1.11-1.63-2.84-1.85-3.46-1.87-1.47-.15-2.88.87-3.63.87-.75 0-1.9-.85-3.12-.83-1.6.02-3.08.93-3.9 2.36-1.67 2.89-.43 7.17 1.2 9.52.8 1.15 1.74 2.44 2.98 2.39 1.2-.05 1.65-.77 3.1-.77 1.44 0 1.85.77 3.11.75 1.29-.02 2.1-1.17 2.89-2.32.91-1.33 1.29-2.62 1.31-2.69-.03-.01-2.5-.96-2.52-3.81zm-2.36-7.01c.66-.8 1.1-1.92.98-3.03-.95.04-2.09.63-2.77 1.43-.61.7-1.14 1.82-.99 2.89 1.05.08 2.12-.54 2.78-1.29z" fill="white"/>
+      </svg>
+      <div class="nav-appstore-text">
+        <span class="nav-appstore-sub">Download on the</span>
+        <span class="nav-appstore-main">App Store</span>
+      </div>
+    </a>
+    <a href="#apply" class="nav-cta">Apply to Join →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><span></span> 23 of 100 founding spots claimed — <strong style="color:var(--caramel2);margin-left:4px;">77 remaining</strong></div>
+      <h1>Your café deserves <em>more customers.</em> We'll send them.</h1>
+      <p>CoffeePass is a mobile marketplace that puts your café directly in front of local coffee drinkers — with zero upfront cost. You only pay when orders come in.</p>
+      <div class="hero-actions">
+        <a href="#apply" class="btn-primary">Apply as a Founding Café →</a>
+        <a href="#how-it-works" class="btn-secondary">See how it works</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">12%</div>
+          <div class="hero-stat-label">Founder rate</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">$0</div>
+          <div class="hero-stat-label">Upfront cost</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">Weekly</div>
+          <div class="hero-stat-label">Direct deposit</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <div class="hero-card-title">📊 Your weekly earnings example</div>
+        <div class="payout-row"><span class="payout-label">Orders this week</span><span class="payout-val">62</span></div>
+        <div class="payout-row"><span class="payout-label">Average order value</span><span class="payout-val">6 credits ($6)</span></div>
+        <div class="payout-row"><span class="payout-label">Gross order revenue</span><span class="payout-val caramel">$372</span></div>
+        <div class="payout-row"><span class="payout-label">CoffeePass fee (12%)</span><span class="payout-val" style="color:#F87171">-$44.64</span></div>
+        <div class="weekly-badge">
+          <span class="weekly-badge-label">💸 Your deposit Monday</span>
+          <span class="weekly-badge-val">$327.36</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="container">
+    <p class="section-tag">The Reality</p>
+    <h2 class="section-title">Running a great café isn't<br />the hard part. Getting found is.</h2>
+    <p class="section-sub">Independent cafés make better coffee than the chains. But chains have marketing budgets, apps, and loyalty programs. You have word of mouth and hope.</p>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="problem-icon">📣</div>
+        <h3>Discovery is broken for indie cafés</h3>
+        <p>Google and Yelp surface whoever pays for ads — usually the chain next door. New customers can't find you even when they're looking for exactly what you offer.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">💸</div>
+        <h3>Marketing is expensive and hard to measure</h3>
+        <p>Instagram ads, Google ads, Yelp — $300-1,500 per month with no guarantee of a single new customer. And you're competing with brands that outspend you 100x.</p>
+      </div>
+      <div class="problem-card reveal">
+        <div class="problem-icon">📱</div>
+        <h3>No digital ordering means lost sales</h3>
+        <p>Customers who can order ahead from their phone will choose the place that lets them. Without mobile ordering, you're invisible to an entire generation of coffee buyers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps" id="how-it-works">
+  <div class="container">
+    <p class="section-tag">How It Works</p>
+    <h2 class="section-title">Set up in 10 minutes.<br/>Start receiving orders today.</h2>
+    <p class="section-sub">No hardware. No monthly fees. No contract. Just new customers ordering from your menu through our app.</p>
+    <div class="steps-grid">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <h3>Apply & set up your menu</h3>
+        <p>Fill out the short form below. We'll onboard you personally. Add your menu, hours, and photos in a guided 3-step wizard.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">2</div>
+        <h3>Go live — get discovered</h3>
+        <p>Your café appears in the CoffeePass app for every coffee drinker in your area. They browse your menu, see your reviews, and place orders.</p>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">3</div>
+        <h3>Fulfill orders, get paid weekly</h3>
+        <p>Orders come in through your dashboard. Mark them ready. Every Monday, your earnings land directly in your bank account. Automatic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EARNINGS -->
+<section class="earnings" id="pricing">
+  <div class="container">
+    <p class="section-tag">The Numbers</p>
+    <h2 class="section-title">Transparent earnings.<br/>You keep 88 cents of every dollar.</h2>
+    <p class="section-sub">Our founder rate is 12%. That means for every dollar customers spend at your café through CoffeePass, you keep 88 cents — automatically deposited every week.</p>
+    <div class="earnings-grid">
+      <div class="math-card reveal">
+        <div class="math-card-title">Per order breakdown — $6 avg order</div>
+        <div class="math-row"><span class="math-row-label">Customer pays</span><span class="math-row-val">$6.00</span></div>
+        <div class="math-row"><span class="math-row-label">CoffeePass fee (12%)</span><span class="math-row-val minus">-$0.72</span></div>
+        <div class="math-row"><span class="math-row-label">Credit processing</span><span class="math-row-val" style="color:rgba(255,255,255,0.4)">$0.00 (included)</span></div>
+        <div class="math-total">
+          <span class="math-total-label">You receive</span>
+          <span class="math-total-val">$5.28</span>
+        </div>
+        <div style="margin-top:16px;font-size:13px;color:rgba(255,255,255,0.4);line-height:1.6;">
+          Compare: DoorDash takes 15–30%. Yelp ads cost $300/month with no performance guarantee. CoffeePass charges you nothing unless you earn.
+        </div>
+      </div>
+
+      <div>
+        <div class="math-card-title" style="color:var(--caramel2);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;">Monthly earnings at different order volumes</div>
+        <div class="scale-table">
+          <div class="scale-table-header">
+            <span>Orders/week</span>
+            <span>Monthly orders</span>
+            <span>Your payout</span>
+          </div>
+          <div class="scale-row">
+            <span class="scale-cafes">30 orders</span>
+            <span class="scale-orders">~129/mo</span>
+            <span class="scale-profit">$680<span class="scale-tag">starter</span></span>
+          </div>
+          <div class="scale-row">
+            <span class="scale-cafes">60 orders</span>
+            <span class="scale-orders">~258/mo</span>
+            <span class="scale-profit">$1,361</span>
+          </div>
+          <div class="scale-row">
+            <span class="scale-cafes">100 orders</span>
+            <span class="scale-orders">~430/mo</span>
+            <span class="scale-profit">$2,270<span class="scale-tag">popular</span></span>
+          </div>
+          <div class="scale-row">
+            <span class="scale-cafes">200 orders</span>
+            <span class="scale-orders">~860/mo</span>
+            <span class="scale-profit">$4,541</span>
+          </div>
+          <div class="scale-row">
+            <span class="scale-cafes">400 orders</span>
+            <span class="scale-orders">~1,720/mo</span>
+            <span class="scale-profit">$9,081<span class="scale-tag">top café</span></span>
+          </div>
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:rgba(255,255,255,0.35);">Based on $6 avg order value × 88% payout rate. Paid every Monday via direct deposit.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER RATE -->
+<section class="founder">
+  <div class="container">
+    <div class="founder-inner reveal">
+      <div class="founder-badge">🔒 Limited Offer — Founding Partner Rate</div>
+      <div class="founder-rate">12<span>%</span></div>
+      <h2>Locked in for Founding Cafés</h2>
+      <p>The first 100 cafés to join CoffeePass get our founder rate of 12% — our lowest platform fee, ever. Once we reach 100 partner cafés, the standard rate becomes 20%. Join now and lock in the difference.</p>
+      <div class="founder-features">
+        <div class="founder-feat"><span class="founder-feat-icon">✓</span> 12% fee, locked in</div>
+        <div class="founder-feat"><span class="founder-feat-icon">✓</span> Featured in app as founding partner</div>
+        <div class="founder-feat"><span class="founder-feat-icon">✓</span> Dedicated onboarding support</div>
+        <div class="founder-feat"><span class="founder-feat-icon">✓</span> Free setup, no contract</div>
+      </div>
+      <a href="#apply" class="btn-primary" style="font-size:17px;padding:18px 40px;">Claim Your Founder Rate →</a>
+      <p class="founder-note">Spots are limited. Rate locks in at signup and remains for as long as your café is active on CoffeePass.</p>
+      <div class="spots-bar-wrap">
+        <div class="spots-bar-label">
+          <span>Founding partner spots</span>
+          <span class="spots-left">77 remaining</span>
+        </div>
+        <div class="spots-bar-track"><div class="spots-bar-fill"></div></div>
+        <div style="font-size:12px;color:var(--gray);margin-top:8px;">23 of 100 spots filled</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section class="compare">
+  <div class="container">
+    <p class="section-tag">The Comparison</p>
+    <h2 class="section-title">CoffeePass vs. everything else<br/>you're already paying for.</h2>
+    <div class="compare-grid">
+      <div class="compare-header neutral">Feature</div>
+      <div class="compare-header bad">Yelp / Google Ads</div>
+      <div class="compare-header good">CoffeePass</div>
+      <div class="compare-cell neutral">Monthly cost</div>
+      <div class="compare-cell bad">$300–1,500/mo fixed</div>
+      <div class="compare-cell good">$0 upfront. 12% on orders</div>
+      <div class="compare-cell neutral">New customer reach</div>
+      <div class="compare-cell bad">Unproven, paid reach</div>
+      <div class="compare-cell good">Local app users near you</div>
+      <div class="compare-cell neutral">Mobile ordering</div>
+      <div class="compare-cell bad">No</div>
+      <div class="compare-cell good">Yes — built in</div>
+      <div class="compare-cell neutral">Performance-based</div>
+      <div class="compare-cell bad">No — pay regardless</div>
+      <div class="compare-cell good">Yes — pay only on sales</div>
+      <div class="compare-cell neutral">Weekly payouts</div>
+      <div class="compare-cell bad">No</div>
+      <div class="compare-cell good">Yes — every Monday</div>
+      <div class="compare-cell neutral">Setup time</div>
+      <div class="compare-cell bad">Hours of setup</div>
+      <div class="compare-cell good">Under 10 minutes</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <p class="section-tag" style="text-align:center">FAQ</p>
+    <h2 class="section-title" style="text-align:center">Common questions<br/>from café owners.</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What does it actually cost me? <span class="arrow">+</span></button>
+        <div class="faq-a">Nothing upfront. Zero monthly fee. Zero setup cost. CoffeePass takes 12% on orders that come through the app. If you receive zero orders, you pay zero. The only cost is a percentage of revenue you wouldn't have had otherwise.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How does the credit system work from my side? <span class="arrow">+</span></button>
+        <div class="faq-a">Customers buy credit bundles from CoffeePass. Each credit is worth $1. When a customer orders a $6 drink from your café, they spend 6 credits. You receive $5.28 (88 cents per credit). You never touch credits — you just receive your payout in dollars every Monday via direct deposit.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I set my own prices? <span class="arrow">+</span></button>
+        <div class="faq-a">Yes, completely. You set every item's credit price on your menu. A $5 latte could be 5 credits, 6 credits, or 7 credits — your choice. We recommend pricing close to your cash prices to keep it straightforward for customers, but there are no restrictions.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">When and how do I get paid? <span class="arrow">+</span></button>
+        <div class="faq-a">Every Monday, CoffeePass calculates your previous week's completed orders and deposits your earnings directly into your linked bank account via Stripe. No manual requests. No invoices. Just a deposit every week.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What happens to the founder rate when you hit 100 cafés? <span class="arrow">+</span></button>
+        <div class="faq-a">Founding cafés keep the 12% rate permanently as long as they remain active on the platform. The 20% standard rate applies only to cafés that join after we reach 100 partners. Your rate is locked in at signup — this is contractual and written into your partner agreement.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do I need any hardware or equipment? <span class="arrow">+</span></button>
+        <div class="faq-a">No. Your café dashboard works on any phone, tablet, or computer. Orders appear in the app. You mark them ready. That's it. No POS integration required, no new hardware, no extra screens.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if I want to leave? <span class="arrow">+</span></button>
+        <div class="faq-a">No contract, no lock-in. Give us 30 days notice and your profile is removed. Any pending payouts are settled in full before your account closes.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNUP FORM -->
+<section class="signup" id="apply">
+  <div class="container">
+    <div class="signup-inner">
+      <p class="section-tag">Apply to Join</p>
+      <h2 class="section-title">Become a Founding Partner.</h2>
+      <p class="section-sub">Fill out the short form below. We'll personally reach out within 24 hours to get you set up. No commitment required.</p>
+
+      <div class="form-card reveal">
+        <form id="applyForm" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="_subject" value="New CoffeePass Founding Partner Application" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="cafeOwner">Your Name</label>
+              <input type="text" id="cafeOwner" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-group">
+              <label for="cafeName">Café Name</label>
+              <input type="text" id="cafeName" name="cafe_name" placeholder="The Daily Grind" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="hello@yourcafe.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" placeholder="New York" required />
+            </div>
+            <div class="form-group">
+              <label for="neighborhood">Neighborhood</label>
+              <input type="text" id="neighborhood" name="neighborhood" placeholder="SoHo" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="orders">Avg daily orders (est.)</label>
+              <select id="orders" name="daily_orders">
+                <option value="">Select a range</option>
+                <option>Under 50</option>
+                <option>50–100</option>
+                <option>100–200</option>
+                <option>200+</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="instagram">Instagram Handle</label>
+              <input type="text" id="instagram" name="instagram" placeholder="@yourcafe" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group full">
+              <label for="message">Anything else you'd like us to know? (optional)</label>
+              <textarea id="message" name="message" placeholder="Tell us about your café, your menu, or any questions you have..."></textarea>
+            </div>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Apply as a Founding Café — Lock in 12% →</button>
+        </form>
+        <p class="form-note">No credit card. No contract. We'll reach out within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Coffee<span>Pass</span></div>
+  <nav class="footer-links">
+    <a href="#how-it-works">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+    <a href="#apply">Apply</a>
+  </nav>
+  <p>© 2026 CoffeePass · Built for independent cafés.</p>
+</footer>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-icon">🎉</div>
+    <h2>You're on the list!</h2>
+    <p>Thanks for applying. We'll personally reach out within 24 hours to get your café set up as a Founding Partner. Welcome to CoffeePass.</p>
+    <button class="modal-close" onclick="closeModal()">Got it</button>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+  // Tab switching (fixed: pass button explicitly instead of relying on global event)
+  function showTab(id, btn) {
+    document.querySelectorAll('.pitch-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.pitch-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // FAQ accordion
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = answer.classList.contains('open');
+    document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+    document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+    if (!isOpen) { answer.classList.add('open'); btn.classList.add('open'); }
+  }
+
+  // Form submit — sends to devancapps97@gmail.com via FormSubmit.co
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+    btn.textContent = 'Sending…';
+
+    const form = document.getElementById('applyForm');
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/devancapps97@gmail.com', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      });
+      if (res.ok) {
+        document.getElementById('modal').classList.add('show');
+        form.reset();
+      } else {
+        alert('Something went wrong. Please email us directly at devancapps97@gmail.com');
+      }
+    } catch {
+      alert('Could not connect. Please email us directly at devancapps97@gmail.com');
+    } finally {
+      btn.classList.remove('loading');
+      btn.textContent = 'Apply as a Founding Café — Lock in 12% →';
+    }
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('show');
+  }
+
+  // Mobile menu toggle
+  function toggleMenu() {
+    document.querySelector('.nav-hamburger').classList.toggle('open');
+    document.querySelector('.nav-actions').classList.toggle('open');
+  }
+
+  // Close mobile menu when a nav link is clicked
+  document.querySelectorAll('.nav-actions a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.nav-hamburger').classList.remove('open');
+      document.querySelector('.nav-actions').classList.remove('open');
+    });
+  });
+
+  // Smooth scroll offset for fixed nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        window.scrollTo({ top: target.offsetTop - 72, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Nav scroll shadow + back-to-top visibility
+  const nav = document.querySelector('nav');
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    backToTop.classList.toggle('visible', window.scrollY > 600);
+  });
+
+  // Scroll-reveal with Intersection Observer
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
