@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "CoffeePass",
+    "slug": "coffeepass",
+    "scheme": "coffeepass",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#3B1F0E"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.coffeepass.mobile"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#3B1F0E",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "package": "com.coffeepass.mobile"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}

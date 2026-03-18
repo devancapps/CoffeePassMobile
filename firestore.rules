@@ -1,0 +1,169 @@
+rules_version = '2';
+
+/**
+ * CoffeePass Firestore Security Rules
+ *
+ * PRD Section 9: Roles & Permissions
+ * - consumer: read cafes/menus, read/write own orders & purchases
+ * - cafe_owner: full CRUD on own cafe, read orders for own cafe
+ * - cafe_staff: read own cafe, redeem tokens for own cafe
+ * - admin: full access (via custom claims)
+ */
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─── Helper Functions ─────────────────────────────────
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    function isCafeOwner(cafeId) {
+      return isAuthenticated() &&
+        get(/databases/$(database)/documents/cafes/$(cafeId)).data.ownerId == request.auth.uid;
+    }
+
+    function isCafeStaff(cafeId) {
+      let cafe = get(/databases/$(database)/documents/cafes/$(cafeId)).data;
+      return isAuthenticated() &&
+        (cafe.ownerId == request.auth.uid || request.auth.uid in cafe.staffIds);
+    }
+
+    // ─── Users Collection ─────────────────────────────────
+
+    match /users/{userId} {
+      // Users can read their own doc; admins can read any
+      allow read: if isOwner(userId) || isAdmin();
+
+      // Users can update their own profile (limited fields)
+      allow update: if isOwner(userId) && !request.resource.data.diff(resource.data).affectedKeys()
+        .hasAny(['creditBalance', 'role']);
+
+      // Only Cloud Functions / admin SDK creates user docs
+      allow create: if false;
+      allow delete: if false;
+    }
+
+    // ─── Cafes Collection ─────────────────────────────────
+
+    match /cafes/{cafeId} {
+      // Anyone authenticated can read active cafes (for discovery)
+      allow read: if isAuthenticated() &&
+        (resource.data.status == 'active' || isCafeStaff(cafeId) || isAdmin());
+
+      // Only cafe owner can create their cafe
+      allow create: if isAuthenticated() &&
+        request.resource.data.ownerId == request.auth.uid;
+
+      // Only cafe owner can update
+      allow update: if isCafeOwner(cafeId) || isAdmin();
+
+      // No client-side deletes
+      allow delete: if isAdmin();
+
+      // ─── Menu Items Subcollection ─────────────────────
+      match /menuItems/{itemId} {
+        // Anyone can read menu items of active cafes
+        allow read: if isAuthenticated();
+
+        // Only cafe owner can manage menu
+        allow create, update, delete: if isCafeOwner(cafeId) || isAdmin();
+      }
+    }
+
+    // ─── Orders Collection ────────────────────────────────
+
+    match /orders/{orderId} {
+      // Consumer can read their own orders
+      // Cafe staff can read orders for their cafe
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid ||
+         isCafeStaff(resource.data.cafeId) ||
+         isAdmin());
+
+      // Only authenticated consumers can create orders
+      allow create: if isAuthenticated() &&
+        request.resource.data.userId == request.auth.uid;
+
+      // Status updates handled by Cloud Functions
+      allow update: if false;
+      allow delete: if false;
+    }
+
+    // ─── Redemption Tokens Collection ─────────────────────
+
+    match /redemptionTokens/{tokenId} {
+      // Consumer can read their own tokens
+      // Cafe staff can read tokens for their cafe (to verify)
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid ||
+         isCafeStaff(resource.data.cafeId) ||
+         isAdmin());
+
+      // Only Cloud Functions create/update tokens
+      allow create, update, delete: if false;
+    }
+
+    // ─── Credit Purchases Collection ──────────────────────
+
+    match /creditPurchases/{purchaseId} {
+      // Users can read their own purchases
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+
+      // Only Cloud Functions manage purchases
+      allow create, update, delete: if false;
+    }
+
+    // ─── Credit Ledger Collection ─────────────────────────
+
+    match /creditLedger/{entryId} {
+      // Users can read their own ledger entries
+      allow read: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+
+      // Only Cloud Functions write ledger entries
+      allow create, update, delete: if false;
+    }
+
+    // ─── Cafe Earnings Collection ─────────────────────────
+
+    match /cafeEarnings/{earningId} {
+      // Cafe owner can read their earnings
+      allow read: if isAuthenticated() &&
+        (isCafeOwner(resource.data.cafeId) || isAdmin());
+
+      // Only Cloud Functions manage earnings
+      allow create, update, delete: if false;
+    }
+
+    // ─── Payouts Collection ───────────────────────────────
+
+    match /payouts/{payoutId} {
+      // Cafe owner can read their payouts
+      allow read: if isAuthenticated() &&
+        (isCafeOwner(resource.data.cafeId) || isAdmin());
+
+      // Only Cloud Functions manage payouts
+      allow create, update, delete: if false;
+    }
+
+    // ─── Default: Deny everything else ────────────────────
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
