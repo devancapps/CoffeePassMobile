@@ -7,7 +7,7 @@
  */
 
 import React, { useMemo, useCallback, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Share } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, BorderRadius } from '@/config/theme';
@@ -19,9 +19,11 @@ import {
   getMockPayouts,
   getMockWeeklySummaries,
   getMockDashboardStats,
+  getMockActivityFeed,
   formatCentsToDollars,
 } from '@/data/mockCafeDashboard';
 import { formatDate } from '@/utils/formatting';
+import { generateTransactionCSV, generatePayoutCSV } from '@/utils/csvExport';
 
 // ─── Helpers ─────────────────────────────────────────────
 
@@ -54,13 +56,22 @@ export const ReportsScreen: React.FC = () => {
     [payouts]
   );
 
-  const handleExportCSV = useCallback(() => {
-    Alert.alert(
-      'Export Transactions',
-      'In the full version, this will generate a CSV file with all your transaction data for accounting purposes.',
-      [{ text: 'OK' }]
-    );
-  }, []);
+  const handleExportCSV = useCallback(async () => {
+    try {
+      const activityFeed = getMockActivityFeed();
+      const csv = selectedTab === 'overview'
+        ? generateTransactionCSV('My Cafe', activityFeed, payouts)
+        : generatePayoutCSV('My Cafe', payouts);
+      await Share.share({
+        message: csv,
+        title: `CoffeePass_${selectedTab === 'overview' ? 'Transactions' : 'Payouts'}_${new Date().toISOString().split('T')[0]}.csv`,
+      });
+    } catch (error) {
+      if ((error as Error).message !== 'User dismissed the Share dialog') {
+        Alert.alert('Export Failed', 'Unable to export CSV. Please try again.');
+      }
+    }
+  }, [selectedTab, payouts]);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>

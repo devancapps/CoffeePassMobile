@@ -26,3 +26,6 @@ export { redeemToken } from './redemption/redeemToken';
 // ─── Scheduled Functions ─────────────────────────────────
 export { processWeeklyPayouts } from './payouts/processWeeklyPayouts';
 export { expireStaleTokens } from './redemption/expireStaleTokens';
+export { expireCredits } from './credits/expireCredits';
+export { reconcileCredits } from './credits/reconcileCredits';
+export { expireFounderRates } from './payouts/expireFounderRates';
