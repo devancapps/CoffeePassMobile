@@ -15,6 +15,7 @@ import React, {
   useState,
   useRef,
   useCallback,
+  useEffect,
   ReactNode,
 } from 'react';
 import {
@@ -136,14 +137,28 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const [toasts, setToasts] = useState<Toast[]>([]);
   const insets = useSafeAreaInsets();
 
+  // Track pending removal timers so they can be cleared on unmount,
+  // preventing setState calls on an unmounted component.
+  const timersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
+
+  useEffect(() => {
+    return () => {
+      // Clear all pending toast-removal timers on unmount
+      timersRef.current.forEach((t) => clearTimeout(t));
+      timersRef.current.clear();
+    };
+  }, []);
+
   const showToast = useCallback((message: string, variant: ToastVariant = 'info') => {
     const id = `toast_${Date.now()}`;
     setToasts((prev) => [...prev, { id, message, variant }]);
 
     // Auto-remove after animation completes (3s display + 0.3s fade out)
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
+      timersRef.current.delete(id);
     }, 3600);
+    timersRef.current.set(id, timer);
   }, []);
 
   return (

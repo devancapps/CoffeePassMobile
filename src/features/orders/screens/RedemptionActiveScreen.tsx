@@ -7,7 +7,7 @@
  */
 
 import React, { useCallback, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Alert, Vibration } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, Shadows, BorderRadius } from '@/config/theme';

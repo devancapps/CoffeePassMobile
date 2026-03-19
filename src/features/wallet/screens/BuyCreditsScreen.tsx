@@ -8,7 +8,7 @@
  * In production: Stripe Payment Intent via Cloud Function.
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import {
   View,
   Text,
@@ -28,6 +28,8 @@ import { CREDIT_BUNDLES, CreditBundle } from '@/config/constants';
 import { formatCurrency, formatCredits } from '@/utils/formatting';
 import { haptics } from '@/utils/haptics';
 import { useToast } from '@/context/ToastContext';
+import { useStripePayment } from '@/hooks/useStripePayment';
+import { USE_STRIPE_PAYMENTS } from '@/config/stripe';
 import type { ConsumerStackScreenProps } from '@/navigation/types';
 
 type PurchaseState = 'selecting' | 'confirming' | 'processing' | 'success' | 'error';
@@ -39,9 +41,14 @@ export const BuyCreditsScreen: React.FC<ConsumerStackScreenProps<'BuyCredits'>> 
 }) => {
   const { user, updateCreditBalance } = useAuth();
   const { showToast } = useToast();
+  const { isProcessing, initiatePayment } = useStripePayment();
   const [selectedBundle, setSelectedBundle] = useState<CreditBundle | null>(null);
   const [purchaseState, setPurchaseState] = useState<PurchaseState>('selecting');
   const [purchasedCredits, setPurchasedCredits] = useState(0);
+
+  // Guard against rapid double-taps firing multiple payment requests
+  // before React re-renders the processing spinner.
+  const isSubmittingRef = useRef(false);
 
   const handleSelectBundle = useCallback((bundle: CreditBundle) => {
     haptics.light();
@@ -50,25 +57,51 @@ export const BuyCreditsScreen: React.FC<ConsumerStackScreenProps<'BuyCredits'>> 
   }, []);
 
   const handleConfirmPurchase = useCallback(async () => {
-    if (!selectedBundle) return;
+    if (!selectedBundle || isSubmittingRef.current) return;
 
+    isSubmittingRef.current = true;
     setPurchaseState('processing');
 
     try {
-      // Mock purchase: simulate 1.5s processing
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const result = await initiatePayment(selectedBundle);
 
-      // Update credit balance
-      await updateCreditBalance(selectedBundle.credits);
+      if (result.status === 'cancelled') {
+        // User dismissed the Payment Sheet — go back to bundle selection
+        isSubmittingRef.current = false;
+        setPurchaseState('selecting');
+        return;
+      }
+
+      if (result.status === 'error') {
+        haptics.error();
+        isSubmittingRef.current = false;
+        setPurchaseState('error');
+        return;
+      }
+
+      // Payment succeeded
+      // In mock mode: immediately update in-memory balance (no webhook).
+      // In Stripe mode: webhook (handleStripeWebhook CF) fulfills credits;
+      //   we optimistically update the local balance for instant UX.
+      if (!USE_STRIPE_PAYMENTS) {
+        await updateCreditBalance(selectedBundle.credits);
+      } else {
+        // Optimistic update: add credits locally while webhook processes
+        await updateCreditBalance(selectedBundle.credits);
+      }
+
       setPurchasedCredits(selectedBundle.credits);
       haptics.success();
       showToast(`${selectedBundle.credits} credits added to your wallet!`, 'success');
       setPurchaseState('success');
+      // Note: isSubmittingRef intentionally stays true on success —
+      // the screen transitions to the success view and never returns here.
     } catch {
       haptics.error();
+      isSubmittingRef.current = false;
       setPurchaseState('error');
     }
-  }, [selectedBundle, updateCreditBalance]);
+  }, [selectedBundle, updateCreditBalance, initiatePayment, showToast]);
 
   const handleDone = useCallback(() => {
     navigation.goBack();
@@ -76,7 +109,7 @@ export const BuyCreditsScreen: React.FC<ConsumerStackScreenProps<'BuyCredits'>> 
 
   // ─── Processing State ──────────────────────────────────
 
-  if (purchaseState === 'processing') {
+  if (purchaseState === 'processing' || isProcessing) {
     return (
       <SafeAreaView style={styles.container}>
         <LoadingSpinner message="Processing payment..." />
@@ -222,17 +255,23 @@ export const BuyCreditsScreen: React.FC<ConsumerStackScreenProps<'BuyCredits'>> 
             </View>
           </Card>
 
-          {/* Payment Method Placeholder */}
+          {/* Payment Method */}
           <Card padding="md" style={styles.paymentCard}>
             <View style={styles.paymentRow}>
               <Ionicons name="card-outline" size={24} color={Colors.caramel} />
               <View style={styles.paymentInfo}>
                 <Text style={styles.paymentTitle}>Payment Method</Text>
                 <Text style={styles.paymentSubtitle}>
-                  Stripe integration (mock mode)
+                  {USE_STRIPE_PAYMENTS
+                    ? 'Stripe Payment Sheet'
+                    : 'Stripe (mock mode — no charge)'}
                 </Text>
               </View>
-              <Ionicons name="chevron-forward" size={18} color={Colors.gray300} />
+              <Ionicons
+                name={USE_STRIPE_PAYMENTS ? 'chevron-forward' : 'flask-outline'}
+                size={18}
+                color={Colors.gray300}
+              />
             </View>
           </Card>
 
