@@ -7,7 +7,7 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { View, Text, StyleSheet, Alert, Vibration } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Typography, Spacing, Shadows, BorderRadius } from '@/config/theme';
@@ -15,6 +15,7 @@ import { Button } from '@/components/Button';
 import { Input } from '@/components/Input';
 import { Card } from '@/components/Card';
 import { Badge } from '@/components/Badge';
+import { haptics } from '@/utils/haptics';
 
 type RedeemState = 'idle' | 'verifying' | 'success' | 'error';
 
@@ -55,7 +56,7 @@ export const RedeemScreen: React.FC = () => {
       }
 
       // Mock success
-      Vibration.vibrate([0, 200, 100, 200]); // Success vibration pattern
+      haptics.success();
       setResult({
         menuItemName: 'Classic Latte',
         customerName: 'Alex',
@@ -63,7 +64,7 @@ export const RedeemScreen: React.FC = () => {
       });
       setRedeemState('success');
     } catch (err) {
-      Vibration.vibrate(500); // Error vibration
+      haptics.error();
       setErrorMessage(
         err instanceof Error ? err.message : 'Verification failed'
       );

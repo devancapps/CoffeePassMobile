@@ -6,7 +6,7 @@
  * PRD Section 8.3: 15-minute TTL token display.
  */
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert, Vibration } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,6 +16,8 @@ import { Button } from '@/components/Button';
 import { Badge } from '@/components/Badge';
 import { useCountdown } from '@/hooks/useCountdown';
 import { useAuth } from '@/hooks/useAuth';
+import { haptics } from '@/utils/haptics';
+import { useToast } from '@/context/ToastContext';
 import { REDEMPTION } from '@/config/constants';
 import type { ConsumerStackScreenProps } from '@/navigation/types';
 
@@ -27,6 +29,7 @@ export const RedemptionActiveScreen: React.FC<
   const { orderId, menuItemName, cafeName, creditAmount, backupCode, expiresAt } =
     route.params;
   const { updateCreditBalance } = useAuth();
+  const { showToast } = useToast();
 
   const expiresAtDate = new Date(expiresAt);
   const { formatted, isExpired, remainingSeconds, progress } = useCountdown(
@@ -35,6 +38,20 @@ export const RedemptionActiveScreen: React.FC<
   );
 
   const [cancelled, setCancelled] = useState(false);
+
+  // Haptic on mount — confirms order placed
+  useEffect(() => {
+    haptics.success();
+  }, []);
+
+  // Haptic warning when 2 minutes remain
+  const warnedRef = React.useRef(false);
+  useEffect(() => {
+    if (remainingSeconds <= 120 && remainingSeconds > 0 && !warnedRef.current) {
+      warnedRef.current = true;
+      haptics.warning();
+    }
+  }, [remainingSeconds]);
 
   const handleCancel = useCallback(() => {
     Alert.alert(
@@ -49,12 +66,9 @@ export const RedemptionActiveScreen: React.FC<
             // Refund credits in mock mode
             await updateCreditBalance(creditAmount);
             setCancelled(true);
-            Vibration.vibrate(100);
-            Alert.alert(
-              'Order Cancelled',
-              `${creditAmount} credits have been refunded to your wallet.`,
-              [{ text: 'OK', onPress: () => navigation.goBack() }]
-            );
+            haptics.warning();
+            showToast(`${creditAmount} credits refunded to your wallet`, 'info');
+            navigation.goBack();
           },
         },
       ]

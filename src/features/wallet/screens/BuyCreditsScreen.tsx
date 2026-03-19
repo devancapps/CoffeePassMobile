@@ -26,6 +26,8 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useAuth } from '@/hooks/useAuth';
 import { CREDIT_BUNDLES, CreditBundle } from '@/config/constants';
 import { formatCurrency, formatCredits } from '@/utils/formatting';
+import { haptics } from '@/utils/haptics';
+import { useToast } from '@/context/ToastContext';
 import type { ConsumerStackScreenProps } from '@/navigation/types';
 
 type PurchaseState = 'selecting' | 'confirming' | 'processing' | 'success' | 'error';
@@ -36,11 +38,13 @@ export const BuyCreditsScreen: React.FC<ConsumerStackScreenProps<'BuyCredits'>> 
   navigation,
 }) => {
   const { user, updateCreditBalance } = useAuth();
+  const { showToast } = useToast();
   const [selectedBundle, setSelectedBundle] = useState<CreditBundle | null>(null);
   const [purchaseState, setPurchaseState] = useState<PurchaseState>('selecting');
   const [purchasedCredits, setPurchasedCredits] = useState(0);
 
   const handleSelectBundle = useCallback((bundle: CreditBundle) => {
+    haptics.light();
     setSelectedBundle(bundle);
     setPurchaseState('confirming');
   }, []);
@@ -57,8 +61,11 @@ export const BuyCreditsScreen: React.FC<ConsumerStackScreenProps<'BuyCredits'>> 
       // Update credit balance
       await updateCreditBalance(selectedBundle.credits);
       setPurchasedCredits(selectedBundle.credits);
+      haptics.success();
+      showToast(`${selectedBundle.credits} credits added to your wallet!`, 'success');
       setPurchaseState('success');
     } catch {
+      haptics.error();
       setPurchaseState('error');
     }
   }, [selectedBundle, updateCreditBalance]);

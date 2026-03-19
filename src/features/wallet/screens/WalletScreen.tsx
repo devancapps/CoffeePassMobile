@@ -5,8 +5,8 @@
  * activity. PRD Section 6.1: Has credits / Zero balance states.
  */
 
-import React, { useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useCallback, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -36,6 +36,8 @@ export const WalletScreen: React.FC = () => {
   // Show recent 5 ledger entries
   const recentEntries = MOCK_LEDGER_ENTRIES.slice(0, 5);
 
+  const [refreshing, setRefreshing] = useState(false);
+
   const handleBuyCredits = useCallback(() => {
     navigation.navigate('BuyCredits');
   }, [navigation]);
@@ -44,11 +46,26 @@ export const WalletScreen: React.FC = () => {
     navigation.navigate('CreditHistory');
   }, [navigation]);
 
+  const handleRefresh = useCallback(async () => {
+    setRefreshing(true);
+    // In production: re-fetch balance + ledger from Firestore
+    await new Promise((r) => setTimeout(r, 800));
+    setRefreshing(false);
+  }, []);
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            tintColor={Colors.caramel}
+            colors={[Colors.caramel]}
+          />
+        }
       >
         <Text style={styles.title}>Wallet</Text>
 

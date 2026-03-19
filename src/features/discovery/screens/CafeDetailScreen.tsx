@@ -25,6 +25,7 @@ import { Badge } from '@/components/Badge';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { useLocation } from '@/hooks/useLocation';
+import { useFavorites } from '@/hooks/useFavorites';
 import { getMockCafe, getMockMenuItems } from '@/data/mockCafes';
 import {
   isCafeOpen,
@@ -45,7 +46,10 @@ export const CafeDetailScreen: React.FC<ConsumerStackScreenProps<'CafeDetail'>> 
 }) => {
   const { cafeId } = route.params;
   const { location } = useLocation();
+  const { isFavorite, toggleFavorite } = useFavorites();
   const [showAllHours, setShowAllHours] = useState(false);
+
+  const favorited = isFavorite(cafeId);
 
   const cafe = useMemo(() => getMockCafe(cafeId), [cafeId]);
   const menuItems = useMemo(() => getMockMenuItems(cafeId), [cafeId]);
@@ -121,6 +125,18 @@ export const CafeDetailScreen: React.FC<ConsumerStackScreenProps<'CafeDetail'>> 
             onPress={() => navigation.goBack()}
           >
             <Ionicons name="arrow-back" size={22} color={Colors.espresso} />
+          </TouchableOpacity>
+
+          {/* Favorite Button */}
+          <TouchableOpacity
+            style={[styles.favoriteButton, Shadows.md as object]}
+            onPress={() => toggleFavorite(cafeId)}
+          >
+            <Ionicons
+              name={favorited ? 'heart' : 'heart-outline'}
+              size={22}
+              color={favorited ? Colors.error : Colors.espresso}
+            />
           </TouchableOpacity>
         </View>
 
@@ -331,6 +347,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Spacing.md,
     left: Spacing.md,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: Colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  favoriteButton: {
+    position: 'absolute',
+    top: Spacing.md,
+    right: Spacing.md,
     width: 40,
     height: 40,
     borderRadius: 20,
